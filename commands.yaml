@@ -1,0 +1,169 @@
+name: AI Commands Collection
+description: A curated collection of AI commands for development workflows and automation
+version: 1.0.0
+author: AI Commands Team
+license: MIT
+
+commands:
+  - name: code-reviewer
+    title: AI Code Reviewer
+    description: Intelligent code review assistant that analyzes code quality, security vulnerabilities, performance issues, and best practices
+    category: development
+    aiPlatform: "claude-code@2025.06"
+    mcpRequirements:
+      - serverId: github
+        tier: required
+      - serverId: filesystem
+        tier: required
+      - serverId: memory
+        tier: required
+      - serverId: sqlite
+        tier: required
+    command_file: code-reviewer/command.md
+    readme: code-reviewer/README.md
+    license: LICENSE
+    thumbnail: "code-reviewer/preview.png"
+    inputParameters:
+      - name: source
+        label: Source Location
+        description: GitHub URL or local file/directory path to analyze
+        type: text
+        required: true
+        defaultValue: ""
+      - name: languages
+        label: Programming Languages
+        description: Specific languages to focus on (auto-detect if not specified)
+        type: text
+        required: false
+        defaultValue: "auto"
+      - name: focus
+        label: Review Focus
+        description: Primary area of analysis
+        type: select
+        required: false
+        defaultValue: "all"
+        options: ["security", "performance", "style", "all"]
+      - name: save_report
+        label: Save Report
+        description: Generate detailed report files
+        type: select
+        required: false
+        defaultValue: "yes"
+        options: ["yes", "no"]
+
+  - name: project-setup
+    title: Project Scaffolder
+    description: Intelligent project setup assistant that creates complete development environments with best practices
+    category: development
+    aiPlatform: "claude-code@2025.06"
+    mcpRequirements:
+      - serverId: filesystem
+        tier: required
+      - serverId: github
+        tier: required
+      - serverId: memory
+        tier: required
+      - serverId: sqlite
+        tier: required
+    command_file: project-setup/command.md
+    readme: project-setup/README.md
+    license: LICENSE
+    thumbnail: "project-setup/preview.png"
+    inputParameters:
+      - name: name
+        label: Project Name
+        description: Name for the new project (will be used for directory and package name)
+        type: text
+        required: true
+        defaultValue: ""
+      - name: stack
+        label: Technology Stack
+        description: Primary technology stack for the project
+        type: select
+        required: true
+        defaultValue: "react"
+        options: ["react", "vue", "nextjs", "express", "fastapi", "django", "go-api", "flutter"]
+      - name: deployment
+        label: Deployment Target
+        description: Target deployment platform
+        type: select
+        required: false
+        defaultValue: "none"
+        options: ["vercel", "netlify", "aws", "docker", "none"]
+      - name: features
+        label: Features
+        description: Comma-separated list of features to include
+        type: text
+        required: false
+        defaultValue: "testing"
+      - name: license
+        label: License Type
+        description: Open source license for the project
+        type: select
+        required: false
+        defaultValue: "mit"
+        options: ["mit", "apache", "gpl"]
+
+  - name: api-explorer
+    title: API Explorer & Documentation Generator
+    description: Comprehensive API analysis tool that discovers, tests, and documents APIs automatically
+    category: api-tools
+    aiPlatform: "claude-code@2025.06"
+    mcpRequirements:
+      - serverId: puppeteer
+        tier: required
+      - serverId: filesystem
+        tier: required
+      - serverId: memory
+        tier: required
+      - serverId: sqlite
+        tier: required
+    command_file: api-explorer/command.md
+    readme: api-explorer/README.md
+    license: LICENSE
+    thumbnail: "api-explorer/preview.png"
+    inputParameters:
+      - name: base_url
+        label: API Base URL
+        description: Base URL of the API to explore and analyze
+        type: text
+        required: true
+        defaultValue: ""
+      - name: auth_type
+        label: Authentication Type
+        description: Authentication method to use for API requests
+        type: select
+        required: false
+        defaultValue: "none"
+        options: ["none", "bearer", "basic", "api_key"]
+      - name: auth_value
+        label: Authentication Value
+        description: Token, key, or credentials for authentication
+        type: text
+        required: false
+        defaultValue: ""
+      - name: output_format
+        label: Output Format
+        description: Format for generated documentation
+        type: select
+        required: false
+        defaultValue: "openapi"
+        options: ["openapi", "postman", "markdown"]
+      - name: test_endpoints
+        label: Test Endpoints
+        description: Whether to test discovered endpoints for functionality
+        type: select
+        required: false
+        defaultValue: "yes"
+        options: ["yes", "no"]
+
+metadata:
+  created: "2025-06-28"
+  updated: "2025-06-28"
+  total_commands: 3
+  supported_platforms:
+    - claude-code
+    - claude
+  minimum_requirements:
+    - MCP support
+    - File system access

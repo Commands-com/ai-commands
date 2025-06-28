@@ -8,6 +8,7 @@ commands:
   - name: code-reviewer
     title: AI Code Reviewer
     description: Intelligent code review assistant that analyzes code quality, security vulnerabilities, performance issues, and best practices
+    type: command
     category: development
     aiPlatform: "claude-code@2025.06"
     mcpRequirements:
@@ -54,6 +55,7 @@ commands:
   - name: project-setup
     title: Project Scaffolder
     description: Intelligent project setup assistant that creates complete development environments with best practices
+    type: command
     category: development
     aiPlatform: "claude-code@2025.06"
     mcpRequirements:
@@ -107,6 +109,7 @@ commands:
   - name: api-explorer
     title: API Explorer & Documentation Generator
     description: Comprehensive API analysis tool that discovers, tests, and documents APIs automatically
+    type: command
     category: api-tools
     aiPlatform: "claude-code@2025.06"
     mcpRequirements:

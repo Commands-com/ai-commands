@@ -20,7 +20,7 @@ commands:
         tier: required
       - serverId: sqlite
         tier: required
-    command_file: code-reviewer/command.md
+    content: code-reviewer/command.md
     readme: code-reviewer/README.md
     license: LICENSE
     thumbnail: "code-reviewer/preview.png"
@@ -67,7 +67,7 @@ commands:
         tier: required
       - serverId: sqlite
         tier: required
-    command_file: project-setup/command.md
+    content: project-setup/command.md
     readme: project-setup/README.md
     license: LICENSE
     thumbnail: "project-setup/preview.png"
@@ -121,7 +121,7 @@ commands:
         tier: required
       - serverId: sqlite
         tier: required
-    command_file: api-explorer/command.md
+    content: api-explorer/command.md
     readme: api-explorer/README.md
     license: LICENSE
     thumbnail: "api-explorer/preview.png"

@@ -163,10 +163,68 @@ commands:
         defaultValue: "yes"
         options: ["yes", "no"]
 
+  - name: smart-command-builder
+    title: Smart Command Builder
+    description: Intelligent command generator that creates complete Commands.com-compatible commands from task descriptions
+    type: command
+    category: development
+    commandName: "/build-command"
+    aiPlatform: "claude-code@2025.06"
+    mcpRequirements:
+      - serverId: commands-com-mcp-demo-server
+        tier: required
+      - serverId: filesystem
+        tier: required
+    content: smart-command-builder/command.md
+    readme: smart-command-builder/README.md
+    license: LICENSE
+    thumbnail: "smart-command-builder/preview.png"
+    inputParameters:
+      - name: task_description
+        label: Task Description
+        description: Describe what you want the command to accomplish
+        type: text
+        required: true
+        defaultValue: ""
+      - name: command_name
+        label: Command Name
+        description: Desired name for the command (auto-generated if not provided)
+        type: text
+        required: false
+        defaultValue: ""
+      - name: category
+        label: Category
+        description: Primary category for the command
+        type: select
+        required: false
+        defaultValue: "auto"
+        options: ["auto", "development", "content-creation", "api-tools", "security-audit"]
+      - name: complexity
+        label: Complexity Level
+        description: Desired complexity and feature richness
+        type: select
+        required: false
+        defaultValue: "medium"
+        options: ["simple", "medium", "advanced"]
+      - name: include_examples
+        label: Include Examples
+        description: Generate usage examples and sample outputs
+        type: select
+        required: false
+        defaultValue: "yes"
+        options: ["yes", "no"]
+      - name: learning_mode
+        label: Learning Mode
+        description: Analyze similar commands to optimize the generated command
+        type: select
+        required: false
+        defaultValue: "yes"
+        options: ["yes", "no"]
+
 metadata:
   created: "2025-06-28"
-  updated: "2025-06-28"
-  total_commands: 3
+  updated: "2025-07-03"
+  total_commands: 4
   supported_platforms:
     - claude-code
     - claude

@@ -221,10 +221,61 @@ commands:
         defaultValue: "yes"
         options: ["yes", "no"]
 
+  - name: eleventy-asset-pipeline
+    title: Eleventy Asset Pipeline
+    description: Scaffold and maintain a production-grade asset pipeline for Eleventy sites with JavaScript bundling, CSS processing, and cache-busting
+    type: command
+    category: development
+    commandName: "/eleventy-asset-pipeline"
+    aiPlatform: "claude-code@2025.06"
+    mcpRequirements:
+      - serverId: filesystem
+        tier: required
+    content: eleventy-asset-pipeline/command.md
+    readme: eleventy-asset-pipeline/README.md
+    license: LICENSE
+    thumbnail: "eleventy-asset-pipeline/preview.png"
+    inputParameters:
+      - name: bundle_mode
+        label: Bundle Mode
+        description: Enable bundle mode for production builds (true = bundle entry-points, false = per-file dev builds)
+        type: select
+        required: false
+        defaultValue: "false"
+        options: ["true", "false"]
+      - name: node_env
+        label: Environment
+        description: Build environment (production = minify & optimize, development = readable output)
+        type: select
+        required: false
+        defaultValue: "development"
+        options: ["development", "production"]
+      - name: hash_length
+        label: Hash Length
+        description: Length of fingerprint hash for cache-busted assets
+        type: select
+        required: false
+        defaultValue: "10"
+        options: ["8", "10", "12", "16"]
+      - name: source_maps
+        label: Generate Source Maps
+        description: Generate source maps in production builds
+        type: select
+        required: false
+        defaultValue: "true"
+        options: ["true", "false"]
+      - name: css_framework
+        label: CSS Framework
+        description: CSS framework to configure (Tailwind CSS is default)
+        type: select
+        required: false
+        defaultValue: "tailwind"
+        options: ["tailwind", "none"]
+
 metadata:
   created: "2025-06-28"
-  updated: "2025-07-03"
-  total_commands: 4
+  updated: "2025-07-19"
+  total_commands: 5
   supported_platforms:
     - claude-code
     - claude

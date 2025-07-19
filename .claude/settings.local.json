@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__commands-com_my-awesome-server__echo",
+      "mcp__commands-com_my-awesome-server__datetime"
+    ],
+    "deny": []
+  }
+}

@@ -6,7 +6,7 @@ description: >
   generates proper commands.yaml entries, and creates all necessary files for immediate
   Commands.com integration via GitHub.
 allowed_tools:
-  - commands-com-mcp-demo-server    # MCP discovery and Commands.com integration
+  - mcp__commands-com_mcp-server    # MCP discovery and Commands.com integration
   - filesystem                     # File creation and directory management
 ---
 
@@ -45,7 +45,7 @@ complexity=advanced
    * `learning_mode` - Whether to analyze existing patterns
 
 2. **MCP Server Discovery and Selection**
-   * Call `/mcp__commands-com-mcp-demo-server__get_mcp_servers` to get available MCPs
+   * Call `/mcp__commands-com_mcp-server__get_mcp_servers` to get available MCPs
    * **Task Analysis**: Parse task description for keywords and requirements
    * **Smart MCP Matching**:
      - Web/scraping tasks → `puppeteer`, `filesystem`
@@ -59,13 +59,13 @@ complexity=advanced
      - Advanced: 3-4 MCPs, comprehensive capabilities
 
 3. **Command Structure Generation**
-   * Call `/mcp__commands-com-mcp-demo-server__get_commands_yaml_guide` for proper formatting
+   * Call `/mcp__commands-com_mcp-server__get_commands_yaml_guide` for proper formatting
    * Generate unique command name (kebab-case) if not provided
    * Auto-categorize based on task description and MCP selection
    * Create parameter schema based on task requirements
 
 4. **Conflict Prevention and Validation**
-   * Call `/mcp__commands-com-mcp-demo-server__list_assets` to check existing user commands
+   * Call `/mcp__commands-com_mcp-server__list_assets` to check existing user commands
    * Ensure no naming conflicts with user's existing assets
    * Validate command name follows conventions (kebab-case, descriptive)
 
@@ -92,7 +92,7 @@ complexity=advanced
    * Update commands.yaml: `/filesystem__write_file path=./commands.yaml`
 
 8. **Quality Assurance and Validation**
-   * Call `/mcp__commands-com-mcp-demo-server__validate_commands_yaml` with generated YAML
+   * Call `/mcp__commands-com_mcp-server__validate_commands_yaml` with generated YAML
    * Validate all generated files follow Commands.com specifications
    * Check for errors, warnings, and suggestions from validation
    * Retry generation if critical errors are found

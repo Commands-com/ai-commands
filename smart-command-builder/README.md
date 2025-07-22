@@ -69,7 +69,7 @@ category=api-tools
 
 ## MCP Server Requirements
 
-This command requires only the **Commands.com MCP server** (`commands-com-mcp-demo-server`), which provides:
+This command requires only the **Commands.com MCP server** (`commands-com/mcp-server`), which provides:
 
 - Access to available MCP servers and their capabilities
 - Commands.com formatting guidelines and specifications

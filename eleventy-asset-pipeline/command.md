@@ -1,29 +1,84 @@
-# Command: /eleventy-asset-pipeline
+# Eleventy Asset Pipeline
+---
+description: >
+  Scaffold and maintain a production-grade asset pipeline for Eleventy sites.
+  Validates project structure, sets up JavaScript bundling with esbuild,
+  CSS processing with PostCSS/Tailwind, and implements cache-busting with
+  content hashing. Creates a complete build system with hot reloading.
+allowed_tools:
+  - filesystem      # Create pipeline files and configurations
+tags:
+  - eleventy
+  - build-tools
+  - asset-pipeline
+  - performance
+category: development
+---
 
-## Purpose
-Scaffold & maintain a production-grade asset pipeline for an Eleventy site.
+## Arguments
 
-## Options (set as env vars before running)
-| Env var       | Default | What it controls |
-|---------------|---------|------------------|
-| BUNDLE_MODE   | false   | true → bundle entry-points, false → per-file dev builds |
-| HASH_LEN      | 10      | fingerprint length for hashed assets |
-| SOURCE_MAPS   | true    | true → generate source maps in production, false → skip them |
+```
+/eleventy-asset-pipeline
+[bundle_mode=<true|false>]
+[hash_length=<8|10|12|16>]
+[source_maps=<true|false>]
+[css_framework=<tailwind|none>]
+```
+*Defaults → `bundle_mode=false  hash_length=10  source_maps=true  css_framework=tailwind`*
 
-## Prerequisites
-Install required dependencies:
+### Examples
+
 ```bash
-npm install --save-dev @11ty/eleventy esbuild postcss autoprefixer cssnano tailwindcss fast-glob dotenv npm-run-all
+# Basic setup with defaults
+/eleventy-asset-pipeline
+
+# Production-optimized setup
+/eleventy-asset-pipeline bundle_mode=true source_maps=false
+
+# Custom hash length without Tailwind
+/eleventy-asset-pipeline hash_length=16 css_framework=none
 ```
 
-## Quick Start
-1. Ensure you're in an Eleventy project root
-2. Run this command to scaffold the asset pipeline
-3. Use `npm run dev` for development or `npm run build:bundles` for production
+---
+
+## Context – what the AI should do
+
+1. **Validate Project Structure**
+   * Check if current directory is an Eleventy project (look for .eleventy.js or eleventy.config.js)
+   * Verify package.json exists
+   * Check for src directory structure or common Eleventy patterns
+   * Analyze existing assets to determine appropriate pipeline configuration
+   * Warn if incompatible setup detected
+
+2. **Parse Arguments**
+   * `bundle_mode` - Whether to bundle JS entry points (production) or keep separate (dev)
+   * `hash_length` - Length of content hash for cache busting
+   * `source_maps` - Whether to generate source maps in production
+   * `css_framework` - CSS framework to configure (currently Tailwind or none)
+
+3. **Dependency Management**
+   * Check which dependencies are already installed
+   * Generate npm install command for missing dependencies only
+   * Required: @11ty/eleventy esbuild postcss autoprefixer cssnano fast-glob dotenv npm-run-all
+   * Optional: tailwindcss (if css_framework=tailwind)
+
+4. **Project Analysis**
+   * Detect existing Eleventy configuration
+   * Identify current asset structure (src/assets, _includes, etc.)
+   * Check for existing build scripts to avoid conflicts
+   * Determine if project uses CommonJS or ES modules
+
+5. **Pipeline Implementation**
+   * All file creation follows the snippets below
+   * Adapt paths based on detected project structure
+   * Preserve existing files with .backup extension if conflicts
+   * Use the complete snippets to ensure one-shot success
 
 ---
 
 ## Implementation
+
+> **Note**: The following implementation uses the exact snippets that enable one-shot pipeline creation. The AI should use these verbatim after validating the project structure.
 
 ### Step 1: Update package.json scripts
 ```javascript
@@ -1214,9 +1269,39 @@ npm run build
 
 ---
 
+## Validation & Safety
+
+The AI should perform these checks before implementing:
+
+1. **Project Validation**
+   * ✓ Eleventy config file exists (.eleventy.js or eleventy.config.js)
+   * ✓ package.json is present
+   * ✓ Source directory structure matches Eleventy patterns
+   * ✓ No conflicting asset pipeline already exists
+
+2. **Backup Strategy**
+   * Create .backup files for any existing configs that will be modified
+   * List all files that will be created/modified before proceeding
+   * Warn about any potential conflicts
+
+3. **Adaptation Logic**
+   * If src/ directory exists, use it as base
+   * If _site/ doesn't exist, check for custom output directory in config
+   * Adapt script paths if package.json shows different structure
+   * Respect existing Eleventy configuration patterns
+
+4. **Success Indicators**
+   * All files created successfully
+   * No npm errors when installing dependencies
+   * Build scripts added to package.json
+   * Asset manifest generation confirmed
+
+---
+
 ## Next Steps
-1. Customize bundle definitions in `build-assets.js`
-2. Add your actual JS files to the bundles
-3. Configure Tailwind for your design system
-4. Add PostCSS plugins as needed
-5. Set up CI/CD with production env vars
+1. Run `npm install` to install any missing dependencies
+2. Use `npm run dev` for development with hot reloading
+3. Use `npm run build:bundles` for production builds
+4. Customize bundle definitions in `scripts/build-assets.js`
+5. Add your JavaScript files to appropriate bundle arrays
+6. Configure Tailwind theme in `tailwind.config.js`

@@ -1,11 +1,12 @@
 # Eleventy Asset Pipeline
 
-A comprehensive asset management solution for Eleventy projects that provides production-grade JavaScript bundling, CSS processing, and cache-busting with minimal configuration.
+A comprehensive asset management solution for Eleventy projects that validates your setup and provides production-grade JavaScript bundling, CSS processing, and cache-busting with minimal configuration.
 
 ## Overview
 
-The Eleventy Asset Pipeline command scaffolds a complete build system for managing JavaScript and CSS assets in your Eleventy projects. It provides:
+The Eleventy Asset Pipeline command first validates your Eleventy project structure, then scaffolds a complete build system for managing JavaScript and CSS assets. It provides:
 
+- **Project Validation** to ensure compatibility before making changes
 - **JavaScript bundling** with esbuild for optimal performance
 - **CSS processing** with PostCSS, Tailwind CSS, and automatic minification
 - **Cache-busting** with content-based hashing for all assets
@@ -15,6 +16,13 @@ The Eleventy Asset Pipeline command scaffolds a complete build system for managi
 
 ## Features
 
+### Project Validation
+- Checks for Eleventy configuration files
+- Verifies package.json exists
+- Detects source directory structure
+- Warns about potential conflicts
+- Creates backups of modified files
+
 ### JavaScript Management
 - ES module bundling with automatic code splitting
 - Development mode with individual file processing for faster rebuilds
@@ -23,7 +31,7 @@ The Eleventy Asset Pipeline command scaffolds a complete build system for managi
 - Support for both bundled and individual file loading
 
 ### CSS Processing
-- PostCSS pipeline with Tailwind CSS integration
+- PostCSS pipeline with optional Tailwind CSS integration
 - Automatic vendor prefixing with Autoprefixer
 - Production minification with cssnano
 - Content-based hashing for cache-busting
@@ -43,27 +51,28 @@ Before running this command, ensure you have:
 - Node.js 14+ installed
 - npm or yarn package manager
 
-## Usage
+## How to Use
 
-1. Navigate to your Eleventy project root
-2. Run the command with your preferred settings
-3. The command will:
-   - Install required dependencies
-   - Create the directory structure
-   - Generate build scripts and configuration files
-   - Set up example JavaScript and CSS files
-   - Configure Eleventy for the asset pipeline
+1. **Bundle Mode**: Choose whether to bundle JavaScript for production or keep files separate for development
+2. **Hash Length**: Select the length of content hashes for cache-busting (8-16 characters)
+3. **Source Maps**: Enable/disable source map generation in production builds
+4. **CSS Framework**: Choose between Tailwind CSS or no framework
+
+The command will:
+- Validate your Eleventy project structure
+- Check for existing configurations
+- Install required dependencies
+- Create the asset pipeline with all necessary files
+- Set up build scripts in package.json
 
 ## Configuration Options
 
-The command respects these environment variables:
-
-| Variable | Default | Description |
-|----------|---------|-------------|
-| `BUNDLE_MODE` | `false` | Enable bundle mode for production builds |
-| `NODE_ENV` | `development` | Set to `production` for optimized builds |
-| `HASH_LEN` | `10` | Length of content hash for cache-busting |
-| `SOURCE_MAPS` | `true` | Generate source maps in production |
+| Parameter | Default | Description |
+|-----------|---------|-------------|
+| `bundle_mode` | `false` | Enable bundle mode for production builds |
+| `hash_length` | `10` | Length of content hash for cache-busting |
+| `source_maps` | `true` | Generate source maps in production |
+| `css_framework` | `tailwind` | CSS framework to configure |
 
 ## Project Structure
 
@@ -113,7 +122,7 @@ npm run build
 
 ### Bundle Mode
 ```bash
-BUNDLE_MODE=true npm run build:bundles
+npm run build:bundles
 ```
 - Creates optimized JavaScript bundles
 - Enables code splitting for better caching
@@ -192,7 +201,7 @@ npm install --save-dev @11ty/eleventy esbuild postcss autoprefixer cssnano tailw
 **Build Failures**
 - Check that all directories exist
 - Verify PostCSS and Tailwind configs are in the root
-- Ensure `BUNDLE_MODE` is set correctly
+- Ensure bundle mode is set correctly
 
 **Assets Not Found**
 - Run a clean build: `npm run clean && npm run build`
@@ -211,6 +220,14 @@ DEBUG=1 npm run build
 3. **Caching**: Rely on content hashes, not query strings
 4. **Performance**: Enable code splitting for large applications
 5. **Security**: Keep dependencies updated regularly
+
+## Safety Features
+
+- Validates Eleventy project before making changes
+- Creates .backup files for any modified configurations
+- Lists all files to be created/modified before proceeding
+- Adapts to your existing project structure
+- Preserves your custom Eleventy settings
 
 ## License
 

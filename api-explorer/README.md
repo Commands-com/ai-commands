@@ -1,30 +1,67 @@
 # API Explorer & Documentation Generator
 
-This AI command performs comprehensive API analysis by discovering, testing, and documenting REST APIs automatically. It explores endpoints, generates OpenAPI specifications, tests authentication methods, and creates interactive documentation.
+Ethical API reconnaissance tool that discovers, tests, and documents APIs while respecting rate limits, robots.txt, and terms of service. Generates comprehensive documentation including OpenAPI specs, Postman collections, and usage guides.
+
+## Key Features:
+- **Ethical Discovery**: Respects robots.txt and implements rate limiting (1 req/sec)
+- **Safe Testing**: Uses read-only methods by default (GET/HEAD)
+- **Comprehensive Documentation**: Generates OpenAPI, Postman, and Markdown docs
+- **Security-First**: Handles credentials securely, strips sensitive data from outputs
+- **Smart Analysis**: Detects authentication methods, schemas, and relationships
+- **GraphQL Support**: Identifies and documents GraphQL endpoints
 
 ## How to Use:
-1. **API Base URL**: Enter the base URL of the API to explore and analyze
-2. **Authentication Type**: Choose the auth method (none, bearer token, basic auth, or API key)
-3. **Authentication Value**: Provide your token, key, or credentials if using authentication
-4. **Output Format**: Select documentation format (OpenAPI, Postman collection, or Markdown)
-5. **Test Endpoints**: Choose whether to test discovered endpoints for functionality
+1. **API Base URL**: Enter the base URL of the API to explore
+2. **Authentication Type**: Choose auth method (none, bearer, basic, api_key)
+3. **Authentication Value**: Provide credentials (handled securely, never logged)
+4. **Depth**: Control exploration thoroughness:
+   - **Shallow**: Basic discovery and documentation only
+   - **Standard**: Full analysis with safe testing methods
+   - **Deep**: Extensive testing including write operations (use carefully)
 
-## What It Does:
-- **Discovery**: Finds API endpoints through robots.txt, common patterns, and documentation scraping
-- **Analysis**: Tests HTTP methods, parameters, response schemas, and error handling
-- **Documentation**: Generates complete API specifications with examples
-- **Testing**: Validates endpoint accessibility and response consistency
-- **Security**: Identifies potential security issues and rate limiting
+## What It Generates:
+- **OpenAPI 3.0 Specification**: Complete API definition with schemas
+- **Postman Collection**: Ready-to-import collection with examples
+- **Markdown Documentation**: Human-readable guides with code examples
+- **Security Analysis**: Authentication requirements and rate limits
+- **Test Report**: Coverage metrics and endpoint health status
 
-## Generated Output:
-- OpenAPI 3.0 specifications
-- Postman collections for testing
-- Human-readable Markdown documentation
-- Code examples in multiple languages
-- Test reports with coverage metrics
+## Safety & Ethics:
+- Implements automatic rate limiting to avoid overwhelming servers
+- Respects robots.txt directives and crawl delays
+- Uses safe HTTP methods (GET/HEAD) unless depth=deep
+- Honors Retry-After headers and implements exponential backoff
+- Strips accidentally captured credentials from all outputs
+- Includes warnings about respecting API terms of service
+
+## Example Commands:
+```bash
+# Basic public API exploration
+/api-explore base_url="https://api.example.com"
+
+# Authenticated API with controlled depth
+/api-explore 
+base_url="https://api.github.com"
+auth_type=bearer
+auth_value="ghp_xxxxxxxxxxxx"
+depth=shallow
+
+# API key authentication with standard exploration
+/api-explore 
+base_url="https://api.service.com/v1"
+auth_type=api_key
+auth_value="your-api-key"
+```
 
 ## Prerequisites:
 - Puppeteer MCP server for web scraping and browser automation
-- Filesystem MCP server for saving documentation and test results
-- Memory MCP server for tracking API patterns and schemas
-- SQLite MCP server for storing API metadata and test history
+- Filesystem MCP server for saving documentation
+- Memory MCP server for tracking patterns and schemas
+- SQLite MCP server for storing metadata and history
+
+## Best Practices:
+- Always check the API's terms of service before exploration
+- Use shallow depth for initial discovery
+- Provide authentication only when necessary
+- Review generated documentation for any sensitive data
+- Use the tool for integration planning, not vulnerability exploitation

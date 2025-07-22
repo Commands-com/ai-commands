@@ -2,7 +2,12 @@
   "permissions": {
     "allow": [
       "mcp__commands-com_my-awesome-server__echo",
-      "mcp__commands-com_my-awesome-server__datetime"
+      "mcp__commands-com_my-awesome-server__datetime",
+      "Bash(mkdir:*)",
+      "mcp__commands-com_mcp-server__get_mcp_servers",
+      "mcp__commands-com_mcp-server__get_commands_yaml_guide",
+      "mcp__commands-com_mcp-server__list_assets",
+      "mcp__commands-com_mcp-server__validate_commands_yaml"
     ],
     "deny": []
   }

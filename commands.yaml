@@ -272,10 +272,78 @@ commands:
         defaultValue: "tailwind"
         options: ["tailwind", "none"]
 
+  - name: discord-release
+    title: Discord Release Generator
+    description: Automatically generate release notes for Discord by analyzing Git commits since the last published release
+    type: command
+    category: development
+    commandName: "/discord-release"
+    aiPlatform: "claude-code@2025.06"
+    mcpRequirements:
+      - serverId: docker-mcp-discord
+        tier: required
+      - serverId: docker-filesystem
+        tier: required
+    content: discord-release/command.md
+    readme: discord-release/README.md
+    license: LICENSE
+    thumbnail: "discord-release/preview.png"
+    inputParameters:
+      - name: guild_id
+        label: Discord Guild ID
+        description: Discord server (guild) ID where the bot will operate
+        type: text
+        required: true
+        defaultValue: ""
+      - name: channel_id
+        label: Discord Channel ID
+        description: Discord channel ID to search for previous release notes
+        type: text
+        required: false
+        defaultValue: ""
+      - name: channel_name
+        label: Channel Name
+        description: Name for the release notes channel (used when creating new channel)
+        type: text
+        required: false
+        defaultValue: "release-notes"
+      - name: days_back
+        label: Days to Look Back
+        description: Number of days to analyze if no previous release found
+        type: text
+        required: false
+        defaultValue: "30"
+      - name: format
+        label: Release Notes Format
+        description: Output format for the release notes
+        type: select
+        required: false
+        defaultValue: "release"
+        options: ["changelog", "release", "simple"]
+      - name: save_file
+        label: Save File Path
+        description: Path to save the generated release notes
+        type: text
+        required: false
+        defaultValue: "release-notes.md"
+      - name: exclude_patterns
+        label: Exclude Patterns
+        description: Comma-separated patterns of commit types to exclude
+        type: text
+        required: false
+        defaultValue: "chore,docs,style"
+      - name: create_channel
+        label: Create Channel
+        description: Create a new read-only channel if it doesn't exist
+        type: select
+        required: false
+        defaultValue: "true"
+        options: ["true", "false"]
+
 metadata:
   created: "2025-06-28"
-  updated: "2025-07-19"
-  total_commands: 5
+  updated: "2025-07-22"
+  total_commands: 6
   supported_platforms:
     - claude-code
     - claude

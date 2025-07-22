@@ -7,7 +7,6 @@ Scaffold & maintain a production-grade asset pipeline for an Eleventy site.
 | Env var       | Default | What it controls |
 |---------------|---------|------------------|
 | BUNDLE_MODE   | false   | true → bundle entry-points, false → per-file dev builds |
-| NODE_ENV      | development | production → minify & optimize, development → readable output |
 | HASH_LEN      | 10      | fingerprint length for hashed assets |
 | SOURCE_MAPS   | true    | true → generate source maps in production, false → skip them |
 
@@ -1109,18 +1108,18 @@ Create `src/_includes/layouts/base.njk`:
   
   <!-- JavaScript bundles -->
   {% if bundles.main %}
-  <script src="{{ bundles.main }}" type="module"></script>
+  
   {% endif %}
   
   <!-- Page-specific bundles -->
   {% if page.bundle == 'admin' and bundles.admin %}
-  <script src="{{ bundles.admin }}" type="module"></script>
+  
   {% endif %}
   
   <!-- Or use individual files in dev -->
   {% if not bundles.main %}
-  <script src="{{ '/assets/js/app.js' | rev }}" type="module"></script>
-  <script src="{{ '/assets/js/navigation.js' | rev }}" type="module"></script>
+  
+  
   {% endif %}
 </body>
 </html>
@@ -1155,18 +1154,18 @@ window.APP_CONFIG = {
 ```nunjucks
 <!-- Basic usage -->
 <link rel="stylesheet" href="{{ '/assets/styles/main.css' | rev }}">
-<script src="{{ '/assets/config.js' | rev }}"></script>
+
 
 <!-- Bundle usage -->
-<script src="{% bundle 'main' %}" type="module"></script>
+
 
 <!-- Conditional bundles -->
 {% if page.isAdmin %}
-<script src="{% bundle 'admin' %}" type="module"></script>
+
 {% endif %}
 
 <!-- Individual files (non-bundled) -->
-<script src="{{ '/assets/js/utils.js' | rev }}" type="module"></script>
+
 ```
 
 ### Accessing Manifest Data

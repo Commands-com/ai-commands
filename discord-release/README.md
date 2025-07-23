@@ -226,5 +226,4 @@ The command automatically works with the Git repository in your current director
 
 ## Support
 
-
-For issues or feature requests, please visit the [Commands.com support](https://commands.com/support) page.
+For issues or feature requests, please visit the [Commands.com support](https://commands.com/support) page.  Thank you.

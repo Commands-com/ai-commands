@@ -523,7 +523,7 @@ if (typeof window !== 'undefined') {
 // <<< ELEVENTY_ASSET_PIPELINE analytics.js END
 ```
 
-### Step 9: Generate import rewriter
+### Step 9: Generate import rewriter with dependency-aware hashing
 Create `build/rev-imports.mjs`:
 ```javascript
 // >>> ELEVENTY_ASSET_PIPELINE rev-imports BEGIN
@@ -556,7 +556,10 @@ if (process.env.BUNDLE_MODE === 'true') {
   process.exit(0);
 }
 
-// First pass: process and hash all JS files
+// First pass: process all files and compute their initial hashes
+console.log("🔍 Computing initial file hashes...");
+const dependencies = new Map(); // Track dependencies for each file
+
 for (const file of fg.sync(`${SRC}/**/!(*.bundle).js`)) {
   const src = fs.readFileSync(file, 'utf8');
   let processedCode;
@@ -594,11 +597,44 @@ for (const file of fg.sync(`${SRC}/**/!(*.bundle).js`)) {
     processedCode = src;
   }
   
+  // Extract dependencies
+  const deps = [];
+  processedCode.replace(
+    /(?<=\b(?:from\s*|import\s*\(?\s*)['"])(\.\.?\/[^'"]+?\.js)(?=['"])/g,
+    (rel) => {
+      const depAbs = path.posix.join(path.dirname(file).replace(/\\/g, '/'), rel);
+      deps.push(depAbs.replace(/\//g, path.sep));
+      return rel;
+    }
+  );
+  dependencies.set(file, deps);
+  
   const hash = digest(processedCode);
-  fileHashes.set(file, { hash, processedCode });
+  fileHashes.set(file, { hash, processedCode, initialHash: hash });
 }
 
-// Second pass: rewrite imports and write files
+// Second pass: include dependency hashes in the final hash
+console.log("🔄 Computing dependency-aware hashes...");
+const getDependencyHash = (file) => {
+  const deps = dependencies.get(file) || [];
+  const depHashes = deps.map(dep => {
+    const depData = fileHashes.get(dep);
+    return depData ? depData.hash : '';
+  }).sort().join(',');
+  
+  const fileData = fileHashes.get(file);
+  // Combine content hash with dependency hashes
+  return digest(fileData.initialHash + depHashes);
+};
+
+// Update all hashes to include dependencies
+for (const file of fileHashes.keys()) {
+  const fileData = fileHashes.get(file);
+  fileData.hash = getDependencyHash(file);
+}
+
+// Third pass: rewrite imports and write files
+console.log("📝 Rewriting imports and generating files...");
 for (const [file, data] of fileHashes) {
   const { hash, processedCode } = data;
   const relPath = path.relative(SRC, file);
@@ -624,18 +660,28 @@ for (const [file, data] of fileHashes) {
   // Ensure output directory exists
   fs.mkdirSync(path.dirname(outAbs), { recursive: true });
   
-  // Clean up old versions
+  // Clean up old versions - keep only the most recent
   const dir = path.dirname(outAbs);
   const baseFileName = path.basename(file, '.js');
+  const currentFileName = path.basename(outAbs);
+  
   if (fs.existsSync(dir)) {
-    const oldFiles = fs.readdirSync(dir).filter(f => 
-      f.startsWith(baseFileName + '.') && 
-      f.endsWith('.js') && 
-      f !== path.basename(outAbs)
-    );
-    oldFiles.forEach(oldFile => {
-      fs.rmSync(path.join(dir, oldFile), { force: true });
-    });
+    // Find all hashed versions of this file
+    const hashedFiles = fs.readdirSync(dir)
+      .filter(f => f.startsWith(baseFileName + '.') && f.endsWith('.js') && f !== currentFileName)
+      .map(f => ({
+        name: f,
+        path: path.join(dir, f),
+        mtime: fs.statSync(path.join(dir, f)).mtime
+      }))
+      .sort((a, b) => b.mtime - a.mtime); // Sort by modification time, newest first
+    
+    // Keep only the most recent old version, delete the rest
+    for (let i = 0; i < hashedFiles.length; i++) {
+      if (i >= 1) { // Keep index 0 (most recent), delete the rest
+        fs.rmSync(hashedFiles[i].path);
+      }
+    }
   }
   
   // Write new file
@@ -666,7 +712,7 @@ function mergeManifest(updates) {
 
 // Update manifest
 mergeManifest(manifest);
-console.log(`✅ Processed ${fileHashes.size} JavaScript files`);
+console.log(`✅ Processed ${fileHashes.size} JavaScript files with dependency-aware hashing`);
 // <<< ELEVENTY_ASSET_PIPELINE rev-imports END
 ```
 
@@ -1253,6 +1299,7 @@ This command is **safe to re-run** anytime:
 4. **CSS not building**: Verify PostCSS and Tailwind configs are in root
 5. **Windows paths**: The pipeline normalizes paths automatically
 6. **Source maps missing**: Check `SOURCE_MAPS` env var isn't set to `false`
+7. **Browser cache issues with modules**: The pipeline uses dependency-aware hashing - when any module changes, all importing modules get new hashes to break browser cache chains
 
 ### Debug Mode
 ```bash

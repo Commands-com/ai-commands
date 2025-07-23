@@ -1305,5 +1305,3 @@ The AI should perform these checks before implementing:
 4. Customize bundle definitions in `scripts/build-assets.js`
 5. Add your JavaScript files to appropriate bundle arrays
 6. Configure Tailwind theme in `tailwind.config.js`
-7. TEST
-8. TESTy

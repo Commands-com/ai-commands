@@ -527,43 +527,43 @@ commands:
         required: false
         defaultValue: "title,date"
 
-  - name: agent-builder
-    title: Agent Builder
+  - name: subagent-builder
+    title: Subagent Builder
     description: Build perfect Claude Code subagents using the latest documentation and best practices
     type: command
     category: development
-    commandName: "/agent-builder"
+    commandName: "/subagent-builder"
     aiPlatform: "claude-code@2025.06"
     mcpRequirements:
       - serverId: filesystem
         tier: required
-    content: agent-builder/command.md
-    readme: agent-builder/README.md
+    content: subagent-builder/command.md
+    readme: subagent-builder/README.md
     license: LICENSE
-    thumbnail: "agent-builder/preview.png"
+    thumbnail: "subagent-builder/preview.png"
     inputParameters:
       - name: name
-        label: Agent Name
+        label: Subagent Name
         description: Name for the subagent (e.g., "code-reviewer")
         type: text
         required: false
         defaultValue: ""
       - name: purpose
-        label: Agent Purpose
-        description: What should this agent do?
+        label: Subagent Purpose
+        description: What should this subagent do?
         type: text
         required: false
         defaultValue: ""
       - name: type
-        label: Agent Type
-        description: General or specialized agent
+        label: Subagent Type
+        description: General or specialized subagent
         type: select
         required: false
         defaultValue: "specialized"
         options: ["general", "specialized"]
       - name: proactive
         label: Proactive Detection
-        description: Should agent detect tasks automatically?
+        description: Should subagent detect tasks automatically?
         type: select
         required: false
         defaultValue: "true"
@@ -576,8 +576,8 @@ commands:
         defaultValue: "minimal"
         options: ["all", "minimal", "custom"]
       - name: category
-        label: Agent Category
-        description: Primary agent category
+        label: Subagent Category
+        description: Primary subagent category
         type: select
         required: false
         defaultValue: "general"

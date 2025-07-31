@@ -1,4 +1,4 @@
-# Agent Builder
+# Subagent Builder
 
 Build perfect Claude Code subagents with best practices and up-to-date documentation. This command reads the latest Claude Code documentation, analyzes your project needs, and creates specialized subagents that follow all recommended patterns.
 
@@ -14,14 +14,14 @@ Build perfect Claude Code subagents with best practices and up-to-date documenta
 
 Basic:
 ```bash
-/agent-builder
+/subagent-builder
 ```
 
 With options:
 ```bash
-/agent-builder name=code-reviewer purpose="Review code for security issues"
-/agent-builder type=specialized category=testing
-/agent-builder proactive=true tools=minimal
+/subagent-builder name=code-reviewer purpose="Review code for security issues"
+/subagent-builder type=specialized category=testing
+/subagent-builder proactive=true tools=minimal
 ```
 
 ## What It Creates

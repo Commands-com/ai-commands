@@ -1,4 +1,4 @@
-# Agent Builder
+# Subagent Builder
 ---
 description: >
   Build perfect Claude Code subagents using the latest documentation and best practices. This command fetches current guidelines, analyzes your needs, and creates specialized agents that follow all recommended patterns for maximum effectiveness.
@@ -12,8 +12,8 @@ allowed_tools:
   - TodoWrite     # Track creation steps
   - Grep          # Find existing patterns
 tags:
-  - agent
   - subagent
+  - builder
   - automation
   - builder
   - claude-code
@@ -22,7 +22,7 @@ category: development
 
 ## Key Features
 
-This command creates perfect Claude Code subagents by:
+This subagent builder creates perfect Claude Code subagents by:
 
 1. **Fetching Latest Docs** - Reads current best practices from docs.anthropic.com
 2. **Interactive Design** - Guides you through agent purpose and capabilities
@@ -33,7 +33,7 @@ This command creates perfect Claude Code subagents by:
 ## Arguments
 
 ```
-/agent-builder
+/subagent-builder
 [name=<string>]               # Agent name (e.g., "code-reviewer")
 [purpose=<string>]            # What the agent does
 [type=<general|specialized>]  # Agent complexity level
@@ -52,7 +52,7 @@ This command creates perfect Claude Code subagents by:
 
 ### 2. Interactive Agent Design
 ```
-🤖 Agent Builder Assistant
+🤖 Subagent Builder Assistant
 
 Let's create your perfect subagent!
 
@@ -68,7 +68,7 @@ Let's create your perfect subagent!
 4. Should it be proactive? (auto-detect tasks)
    > Yes, check code automatically
 
-Building your agent...
+Building your subagent...
 ```
 
 ### 3. Generated Agent Structure
@@ -146,19 +146,19 @@ Creates validation scenarios:
 - Sets up version control structure
 - Configures proactive detection patterns
 
-## Agent Types and Patterns
+## Subagent Types and Patterns
 
-### General-Purpose Agents
+### General-Purpose Subagents
 - Broad capabilities with flexible tool access
 - Good for exploratory or research tasks
 - Example: "research-assistant", "documentation-writer"
 
-### Specialized Agents
+### Specialized Subagents
 - Focused on specific domains
 - Minimal tool permissions
 - Example: "security-reviewer", "performance-optimizer"
 
-### Proactive Agents
+### Proactive Subagents
 - Auto-detect when to engage
 - Monitor for specific triggers
 - Example: "code-reviewer", "test-writer"
@@ -175,7 +175,7 @@ Creates validation scenarios:
 
 ### Creating a Test Writer Agent
 ```
-/agent-builder name=test-writer purpose="Write comprehensive test suites" proactive=true
+/subagent-builder name=test-writer purpose="Write comprehensive test suites" proactive=true
 
 Generated agent will:
 - Detect when new functions are added
@@ -186,7 +186,7 @@ Generated agent will:
 
 ### Creating a Documentation Agent
 ```
-/agent-builder name=doc-writer purpose="Keep documentation up-to-date" category=content
+/subagent-builder name=doc-writer purpose="Keep documentation up-to-date" category=content
 
 Generated agent will:
 - Monitor code changes
@@ -197,7 +197,7 @@ Generated agent will:
 
 ### Creating a Performance Agent
 ```
-/agent-builder name=perf-monitor purpose="Optimize slow code" tools=minimal
+/subagent-builder name=perf-monitor purpose="Optimize slow code" tools=minimal
 
 Generated agent will:
 - Profile performance bottlenecks
@@ -368,7 +368,7 @@ const generateTests = async (config) => {
 
 ```javascript
 const main = async () => {
-  console.log('🤖 Agent Builder - Creating Your Perfect Claude Code Subagent\n');
+  console.log('🤖 Subagent Builder - Creating Your Perfect Claude Code Subagent\n');
   
   // Track progress
   await todoWrite([

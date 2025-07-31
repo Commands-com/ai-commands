@@ -340,10 +340,259 @@ commands:
         defaultValue: "true"
         options: ["true", "false"]
 
+  - name: docs-guardrails
+    title: Docs Guardrails
+    description: Ship content without surprises—no 404s, no empty titles, no brand hits. One-shot setup for docs quality that catches broken links, missing alt text, and frontmatter errors.
+    type: command
+    category: testing
+    commandName: "/docs-guardrails"
+    aiPlatform: "claude-code@2025.06"
+    mcpRequirements:
+      - serverId: filesystem
+        tier: required
+    content: docs-guardrails/command.md
+    readme: docs-guardrails/README.md
+    license: LICENSE
+    thumbnail: "docs-guardrails/preview.png"
+    inputParameters:
+      - name: mode
+        label: Enforcement Mode
+        description: Start with report-only to see issues before enforcing
+        type: select
+        required: false
+        defaultValue: "report-only"
+        options: ["report-only", "enforce"]
+      - name: scope
+        label: Link Checking Scope
+        description: Check markdown only (fast) or also built HTML (thorough)
+        type: select
+        required: false
+        defaultValue: "all"
+        options: ["markdown-only", "all"]
+      - name: frontmatter_required
+        label: Required Frontmatter Keys
+        description: Comma-separated list of required frontmatter fields
+        type: text
+        required: false
+        defaultValue: "title,date"
+      - name: ignore_domains
+        label: Domains to Ignore
+        description: Skip these domains when checking links (comma-separated)
+        type: text
+        required: false
+        defaultValue: "localhost,127.0.0.1"
+      - name: thresholds_broken_links
+        label: Broken Links Threshold
+        description: Maximum allowed broken links before failing
+        type: text
+        required: false
+        defaultValue: "5"
+      - name: thresholds_markdown
+        label: Markdown Issues Threshold
+        description: Maximum allowed markdown issues before failing
+        type: text
+        required: false
+        defaultValue: "20"
+      - name: thresholds_frontmatter
+        label: Frontmatter Issues Threshold
+        description: Maximum allowed frontmatter issues before failing
+        type: text
+        required: false
+        defaultValue: "10"
+      - name: build_command
+        label: Build Command
+        description: Command to build your site (auto-detected if not specified)
+        type: text
+        required: false
+        defaultValue: "auto"
+      - name: output_dir
+        label: Output Directory
+        description: Built site output directory (auto-detected if not specified)
+        type: text
+        required: false
+        defaultValue: "auto"
+
+  - name: performance-agent-builder
+    title: Performance Agent Builder
+    description: Install a specialized Claude Code subagent that automatically monitors, diagnoses, and fixes performance issues in your codebase
+    type: command
+    category: testing
+    commandName: "/performance-agent-builder"
+    aiPlatform: "claude-code@2025.06"
+    mcpRequirements:
+      - serverId: filesystem
+        tier: required
+    content: performance-agent-builder/command.md
+    readme: performance-agent-builder/README.md
+    license: LICENSE
+    thumbnail: "performance-agent-builder/preview.png"
+    inputParameters:
+      - name: languages
+        label: Programming Languages
+        description: Languages to support (auto-detects if not specified)
+        type: text
+        required: false
+        defaultValue: "auto"
+      - name: install_global
+        label: Install Globally
+        description: Install subagent for all projects (not just current)
+        type: select
+        required: false
+        defaultValue: "false"
+        options: ["true", "false"]
+      - name: profile_mode
+        label: Profile Mode
+        description: Profiling depth and detail level
+        type: select
+        required: false
+        defaultValue: "quick"
+        options: ["quick", "thorough"]
+      - name: min_improvement
+        label: Minimum Improvement %
+        description: Minimum performance gain to keep optimizations
+        type: text
+        required: false
+        defaultValue: "10"
+      - name: max_runtime
+        label: Maximum Runtime (minutes)
+        description: Time limit for optimization process
+        type: text
+        required: false
+        defaultValue: "15"
+
+  - name: docs-validator-agent-builder
+    title: Docs Validator Agent Builder
+    description: Install a specialized Claude Code subagent that automatically monitors, validates, and fixes documentation issues in your codebase
+    type: command
+    category: testing
+    commandName: "/docs-validator-agent-builder"
+    aiPlatform: "claude-code@2025.06"
+    mcpRequirements:
+      - serverId: filesystem
+        tier: required
+    content: docs-validator-agent-builder/command.md
+    readme: docs-validator-agent-builder/README.md
+    license: LICENSE
+    thumbnail: "docs-validator-agent-builder/preview.png"
+    inputParameters:
+      - name: frameworks
+        label: Static Site Frameworks
+        description: Frameworks to support (auto-detects if not specified)
+        type: text
+        required: false
+        defaultValue: "auto"
+      - name: install_global
+        label: Install Globally
+        description: Install subagent for all projects (not just current)
+        type: select
+        required: false
+        defaultValue: "false"
+        options: ["true", "false"]
+      - name: mode
+        label: Validation Mode
+        description: Start with report-only or enforce immediately
+        type: select
+        required: false
+        defaultValue: "report-only"
+        options: ["report-only", "enforce"]
+      - name: validation_scope
+        label: Validation Scope
+        description: Check markdown only or include built HTML
+        type: select
+        required: false
+        defaultValue: "markdown-only"
+        options: ["markdown-only", "all"]
+      - name: thresholds_broken_links
+        label: Broken Links Threshold
+        description: Maximum allowed broken links
+        type: text
+        required: false
+        defaultValue: "5"
+      - name: thresholds_markdown
+        label: Markdown Issues Threshold
+        description: Maximum allowed markdown issues
+        type: text
+        required: false
+        defaultValue: "20"
+      - name: thresholds_frontmatter
+        label: Frontmatter Issues Threshold
+        description: Maximum allowed frontmatter issues
+        type: text
+        required: false
+        defaultValue: "10"
+      - name: frontmatter_required
+        label: Required Frontmatter Fields
+        description: Comma-separated list of required fields
+        type: text
+        required: false
+        defaultValue: "title,date"
+
+  - name: agent-builder
+    title: Agent Builder
+    description: Build perfect Claude Code subagents using the latest documentation and best practices
+    type: command
+    category: development
+    commandName: "/agent-builder"
+    aiPlatform: "claude-code@2025.06"
+    mcpRequirements:
+      - serverId: filesystem
+        tier: required
+    content: agent-builder/command.md
+    readme: agent-builder/README.md
+    license: LICENSE
+    thumbnail: "agent-builder/preview.png"
+    inputParameters:
+      - name: name
+        label: Agent Name
+        description: Name for the subagent (e.g., "code-reviewer")
+        type: text
+        required: false
+        defaultValue: ""
+      - name: purpose
+        label: Agent Purpose
+        description: What should this agent do?
+        type: text
+        required: false
+        defaultValue: ""
+      - name: type
+        label: Agent Type
+        description: General or specialized agent
+        type: select
+        required: false
+        defaultValue: "specialized"
+        options: ["general", "specialized"]
+      - name: proactive
+        label: Proactive Detection
+        description: Should agent detect tasks automatically?
+        type: select
+        required: false
+        defaultValue: "true"
+        options: ["true", "false"]
+      - name: tools
+        label: Tool Permissions
+        description: Tool access strategy
+        type: select
+        required: false
+        defaultValue: "minimal"
+        options: ["all", "minimal", "custom"]
+      - name: category
+        label: Agent Category
+        description: Primary agent category
+        type: select
+        required: false
+        defaultValue: "general"
+        options: ["general", "testing", "content", "development", "security"]
+      - name: examples
+        label: Example Count
+        description: Number of example prompts to generate
+        type: text
+        required: false
+        defaultValue: "3"
+
 metadata:
   created: "2025-06-28"
-  updated: "2025-07-22"
-  total_commands: 6
+  updated: "2025-07-30"
+  total_commands: 10
   supported_platforms:
     - claude-code
     - claude

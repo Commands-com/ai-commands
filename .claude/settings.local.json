@@ -7,7 +7,18 @@
       "mcp__commands-com_mcp-server__get_mcp_servers",
       "mcp__commands-com_mcp-server__get_commands_yaml_guide",
       "mcp__commands-com_mcp-server__list_assets",
-      "mcp__commands-com_mcp-server__validate_commands_yaml"
+      "mcp__commands-com_mcp-server__validate_commands_yaml",
+      "mcp__commands-com_mcp-server__ping",
+      "mcp__commands-com_mcp-server__get_trending_commands",
+      "mcp__commands-com_mcp-server__get_categories",
+      "mcp__commands-com_chief-architect__architect_describe",
+      "mcp__commands-com_chief-architect__architect_ask",
+      "mcp__commands-com_chief-architect__architect_result",
+      "Bash(mv:*)",
+      "Bash(rm:*)",
+      "Bash(ls:*)",
+      "WebFetch(domain:docs.anthropic.com)",
+      "Bash(cp:*)"
     ],
     "deny": []
   }

@@ -15,7 +15,7 @@ The fastest way to create and publish AI commands is through Commands.com. Visit
 **Category:** Development  
 **Difficulty:** Intermediate  
 
-Intelligent code review assistant that analyzes code quality, security vulnerabilities, performance issues, and best practices.
+Production-ready code review assistant with security analysis, maintainability scoring, and CI/CD integration via SARIF output.
 
 **Required MCP Servers:** github, filesystem, memory, sqlite
 
@@ -31,7 +31,7 @@ languages=javascript,typescript
 **Category:** Development  
 **Difficulty:** Beginner  
 
-Intelligent project setup assistant that creates complete development environments with best practices.
+Production-grade project bootstrapper with security-first practices, validated configurations, and comprehensive testing.
 
 **Required MCP Servers:** filesystem, github, memory, sqlite
 
@@ -48,7 +48,7 @@ features=auth,database,testing,api
 **Category:** API Tools  
 **Difficulty:** Intermediate  
 
-Comprehensive API analysis tool that discovers, tests, and documents APIs automatically.
+Ethical API reconnaissance tool that discovers and documents APIs while respecting rate limits and terms of service.
 
 **Required MCP Servers:** puppeteer, filesystem, memory, sqlite
 
@@ -59,31 +59,198 @@ output_format=openapi
 test_endpoints=yes
 ```
 
+### 🤖 Smart Command Builder
+**File:** `smart-command-builder/command.md`  
+**Category:** Development  
+**Difficulty:** Beginner  
+
+Intelligent command generator that creates complete Commands.com-compatible commands from task descriptions.
+
+**Required MCP Servers:** commands-com/mcp-server, filesystem
+
+```bash
+/build-command 
+task_description="analyze git commits and generate release notes"
+category=development
+complexity=medium
+```
+
+### 🎨 Eleventy Asset Pipeline
+**File:** `eleventy-asset-pipeline/command.md`  
+**Category:** Development  
+**Difficulty:** Intermediate  
+
+Validates and scaffolds a production-grade asset pipeline for Eleventy sites with JavaScript bundling, CSS processing, and cache-busting.
+
+**Required MCP Servers:** filesystem
+
+```bash
+/eleventy-asset-pipeline 
+bundle_mode=true
+css_framework=tailwind
+source_maps=true
+```
+
+### 📢 Discord Release Generator
+**File:** `discord-release/command.md`  
+**Category:** Development  
+**Difficulty:** Intermediate  
+
+Automatically generate release notes for Discord by analyzing Git commits since the last published release.
+
+**Required MCP Servers:** docker-mcp-discord, docker-filesystem
+
+```bash
+/discord-release 
+guild_id="YOUR_GUILD_ID"
+channel_name="release-notes"
+format=release
+days_back=30
+```
+
+### 🛡️ Docs Guardrails
+**File:** `docs-guardrails/command.md`  
+**Category:** Testing  
+**Difficulty:** Beginner  
+
+Ship content without surprises—no 404s, no empty titles, no brand hits. One-shot setup for docs quality that catches broken links, missing alt text, and frontmatter errors.
+
+**Required MCP Servers:** filesystem
+
+```bash
+/docs-guardrails 
+mode=report-only
+scope=all
+frontmatter_required=title,date
+```
+
+### ⚡ Performance Agent Builder
+**File:** `performance-agent-builder/command.md`  
+**Category:** Testing  
+**Difficulty:** Advanced  
+
+Install a specialized Claude Code subagent that automatically monitors, diagnoses, and fixes performance issues in your codebase.
+
+**Required MCP Servers:** filesystem
+
+```bash
+/performance-agent-builder 
+languages=auto
+profile_mode=quick
+min_improvement=10
+```
+
+### 📝 Docs Validator Agent Builder
+**File:** `docs-validator-agent-builder/command.md`  
+**Category:** Testing  
+**Difficulty:** Advanced  
+
+Install a specialized Claude Code subagent that automatically monitors, validates, and fixes documentation issues in your codebase.
+
+**Required MCP Servers:** filesystem
+
+```bash
+/docs-validator-agent-builder 
+frameworks=auto
+mode=report-only
+validation_scope=markdown-only
+```
+
+### 🔧 Subagent Builder
+**File:** `subagent-builder/command.md`  
+**Category:** Development  
+**Difficulty:** Advanced  
+
+Build perfect Claude Code subagents using the latest documentation and best practices.
+
+**Required MCP Servers:** filesystem
+
+```bash
+/subagent-builder 
+name="code-reviewer"
+purpose="Review code for security and quality"
+type=specialized
+proactive=true
+```
+
+### 👥 Review Team Manager
+**File:** `review-team/command.md`  
+**Category:** Development  
+**Difficulty:** Advanced  
+
+Creates and manages a project-aware code review team of specialized Claude Code agents tailored to your specific project.
+
+**Required MCP Servers:** filesystem
+
+```bash
+/review-team 
+agent=code-quality-reviewer
+check=false
+create=true
+```
+
 ## 🛠️ Required MCP Servers
 
 | Server | Description | Commands |
 |--------|-------------|----------|
 | `github` | GitHub repository and PR management | code-reviewer, project-setup |
 | `filesystem` | File system operations | All commands |
-| `memory` | Persistent memory and knowledge graph | All commands |
-| `sqlite` | Local database operations | All commands |
+| `memory` | Persistent memory and knowledge graph | code-reviewer, project-setup, api-explorer |
+| `sqlite` | Local database operations | code-reviewer, project-setup, api-explorer |
 | `puppeteer` | Browser automation and web scraping | api-explorer |
+| `commands-com/mcp-server` | Commands.com MCP integration | smart-command-builder |
+| `docker-mcp-discord` | Discord integration via Docker | discord-release |
+| `docker-filesystem` | Docker filesystem access | discord-release |
 
 ## 📁 Repository Structure
 
 ```
 ai-commands/
-├── commands.yaml          # Repository metadata and command definitions
-├── README.md              # This file
-├── code-reviewer/
-│   ├── command.md         # Code review command
-│   └── preview.png        # Command preview image
-├── project-setup/
-│   ├── command.md         # Project scaffolding command  
-│   └── preview.png        # Command preview image
-└── api-explorer/
-    ├── command.md         # API exploration command
-    └── preview.png        # Command preview image
+├── commands.yaml                    # Repository metadata and command definitions
+├── README.md                        # This file
+├── LICENSE                          # MIT License
+├── code-reviewer/                   # AI Code Reviewer
+│   ├── command.md
+│   ├── README.md
+│   └── preview.png
+├── project-setup/                   # Project Scaffolder
+│   ├── command.md
+│   ├── README.md
+│   └── preview.png
+├── api-explorer/                    # API Explorer & Documentation Generator
+│   ├── command.md
+│   ├── README.md
+│   └── preview.png
+├── smart-command-builder/           # Smart Command Builder
+│   ├── command.md
+│   ├── README.md
+│   └── preview.png
+├── eleventy-asset-pipeline/         # Eleventy Asset Pipeline
+│   ├── command.md
+│   ├── README.md
+│   └── preview.png
+├── discord-release/                 # Discord Release Generator
+│   ├── command.md
+│   ├── README.md
+│   └── preview.png
+├── docs-guardrails/                 # Docs Guardrails
+│   ├── command.md
+│   └── README.md
+├── performance-agent-builder/       # Performance Agent Builder
+│   ├── command.md
+│   ├── README.md
+│   └── FIXES_APPLIED.md
+├── docs-validator-agent-builder/    # Docs Validator Agent Builder
+│   ├── command.md
+│   └── README.md
+├── subagent-builder/                # Subagent Builder
+│   ├── command.md
+│   ├── README.md
+│   └── preview.png
+└── review-team/                     # Review Team Manager
+    ├── command.md
+    ├── README.md
+    └── preview.png
 ```
 
 ## 🚀 Creating Your Own Commands

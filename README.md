@@ -4,17 +4,9 @@ A curated collection of AI commands for development workflows and automation. Th
 
 ## 🚀 Quick Start
 
-### Prerequisites
+The fastest way to create and publish AI commands is through Commands.com. Visit the quick-start guide to get started in under 2 minutes:
 
-- Claude Code or compatible AI assistant with MCP support
-- Required MCP servers (see individual command requirements)
-
-### Usage
-
-1. Clone or download this repository
-2. Import commands into your AI assistant via GitHub integration
-3. Ensure required MCP servers are installed and configured
-4. Run commands using the specified syntax
+👉 **[https://commands.com/creator/commands-prompts/quick-start/](https://commands.com/creator/commands-prompts/quick-start/)**
 
 ## 📋 Available Commands
 
@@ -94,56 +86,51 @@ ai-commands/
     └── preview.png        # Command preview image
 ```
 
-## 🔧 MCP Server Installation
+## 🚀 Creating Your Own Commands
 
-### GitHub Server
-```bash
-npm install @modelcontextprotocol/server-github
-```
+### Option 1: AI-Powered Generation (Recommended)
 
-### Filesystem Server  
-```bash
-npm install @modelcontextprotocol/server-filesystem
-```
+Use the Commands.com MCP to automatically generate your `commands.yaml` file:
 
-### Memory Server
-```bash
-npm install @modelcontextprotocol/server-memory
-```
+1. **Connect the Commands.com MCP** to Claude
+2. **Use AI prompts** to scan your repository and generate commands
+3. **Commit to GitHub** and import to Commands.com
 
-### SQLite Server
-```bash
-npm install @mokei/mcp-sqlite
-```
+Full guide: [https://commands.com/creator/commands-prompts/quick-start/](https://commands.com/creator/commands-prompts/quick-start/)
 
-### Puppeteer Server
-```bash
-npm install @modelcontextprotocol/server-puppeteer
-```
+### Option 2: Manual Creation
+
+1. Create a new directory for your command
+2. Add `command.md` with proper YAML frontmatter
+3. Include a preview image (optional but recommended)
+4. Update `commands.yaml` with command metadata
+5. Test thoroughly with required MCP servers
 
 ## 📖 Usage Guidelines
 
-1. **Read Command Documentation**: Each command has detailed instructions in its `command.md` file
-2. **Check Prerequisites**: Ensure all required MCP servers are installed
-3. **Follow Argument Syntax**: Use the exact argument format specified
+1. **Install Required MCP Servers**: Ensure all required MCP servers are installed and configured
+2. **Check Command Documentation**: Each command has detailed instructions in its `command.md` file
+3. **Follow Argument Syntax**: Use the exact argument format specified in the command
 4. **Review Output**: Commands generate files and reports - check the specified output directories
 
 ## 🤝 Contributing
 
-Feel free to contribute new commands or improvements:
+We welcome contributions of new commands or improvements:
 
-1. Create a new directory for your command
-2. Add `command.md` with proper YAML frontmatter
-3. Include preview image
-4. Update `commands.yaml` with command metadata
-5. Test thoroughly with required MCP servers
+1. Fork this repository
+2. Create your command following the structure above
+3. Test with all required MCP servers
+4. Submit a pull request
+
+For command ideas and best practices, visit the [Commands.com documentation](https://commands.com/docs/).
 
 ## 📄 License
 
 MIT License - see individual command files for specific licensing information.
 
-## 🔗 Links
+## 🔗 Resources
 
-- [Claude Code Documentation](https://docs.anthropic.com/claude/docs/claude-code)
-- [MCP Documentation](https://modelcontextprotocol.io/)
-- [Example Prompts Repository](https://github.com/user/ai-image-prompts)
+- [Commands.com Platform](https://commands.com) - Discover and share AI commands
+- [Claude Code Documentation](https://docs.anthropic.com/claude/docs/claude-code) - Official Claude Code docs
+- [MCP Documentation](https://modelcontextprotocol.io/) - Model Context Protocol specification
+- [Commands.com Quick Start](https://commands.com/creator/commands-prompts/quick-start/) - Create commands with AI

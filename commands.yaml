@@ -589,10 +589,54 @@ commands:
         required: false
         defaultValue: "3"
 
+  - name: review-team
+    title: Review Team Manager
+    description: Creates and manages a project-aware code review team of specialized Claude Code agents tailored to your specific project
+    type: command
+    category: development
+    commandName: "/review-team"
+    aiPlatform: "claude-code@2025.06"
+    mcpRequirements:
+      - serverId: filesystem
+        tier: required
+    content: review-team/command.md
+    readme: review-team/README.md
+    license: LICENSE
+    thumbnail: "review-team/preview.png"
+    inputParameters:
+      - name: agent
+        label: Specific Agent
+        description: Run a specific agent instead of full team
+        type: select
+        required: false
+        defaultValue: ""
+        options: ["", "implementation-verifier", "reality-checker", "code-quality-reviewer", "compliance-validator", "completion-auditor", "ui-tester"]
+      - name: check
+        label: Check Status Only
+        description: Only check agent status without running reviews
+        type: select
+        required: false
+        defaultValue: "false"
+        options: ["true", "false"]
+      - name: create
+        label: Force Create
+        description: Force recreate all agents even if they exist
+        type: select
+        required: false
+        defaultValue: "false"
+        options: ["true", "false"]
+      - name: verbose
+        label: Verbose Output
+        description: Show detailed help and descriptions
+        type: select
+        required: false
+        defaultValue: "false"
+        options: ["true", "false"]
+
 metadata:
   created: "2025-06-28"
-  updated: "2025-07-30"
-  total_commands: 10
+  updated: "2025-08-01"
+  total_commands: 11
   supported_platforms:
     - claude-code
     - claude

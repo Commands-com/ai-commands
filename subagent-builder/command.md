@@ -47,7 +47,8 @@ This subagent builder creates perfect Claude Code subagents by:
 
 ### 1. Documentation Analysis
 - Fetches latest subagent guidelines from Claude Code docs
-- Analyzes successful agent patterns in your codebase
+- Checks specific URLs: `/sub-agents`, `/hooks`, `/settings` pages
+- Analyzes successful agent patterns in `.claude/agents/` directory
 - Identifies best practices for your use case
 
 ### 2. Interactive Agent Design
@@ -145,6 +146,7 @@ Creates validation scenarios:
 - Creates example prompts for team members
 - Sets up version control structure
 - Configures proactive detection patterns
+- **Hook Configuration**: For proactive agents, provides instructions on adding to user prompt hooks
 
 ## Subagent Types and Patterns
 
@@ -214,8 +216,14 @@ Generated agent will:
 const fetchLatestDocs = async () => {
   console.log('📚 Fetching latest Claude Code subagent documentation...');
   
+  // Check if agent docs exist locally first for faster access
+  const localAgentDocs = await glob('.claude/agents/*.md');
+  console.log(`Found ${localAgentDocs.length} existing agents for pattern analysis`);
+  
   const docsUrls = [
     'https://docs.anthropic.com/en/docs/claude-code/sub-agents',
+    'https://docs.anthropic.com/en/docs/claude-code/hooks',  // Hook configuration
+    'https://docs.anthropic.com/en/docs/claude-code/settings',  // Settings structure
     'https://docs.anthropic.com/en/docs/claude-code/best-practices',
     'https://docs.anthropic.com/en/docs/claude-code/common-workflows'
   ];
@@ -223,7 +231,7 @@ const fetchLatestDocs = async () => {
   const docs = {};
   for (const url of docsUrls) {
     const content = await webFetch(url, 
-      'Extract all guidelines, patterns, and best practices for creating effective subagents'
+      'Extract all guidelines about subagents, hooks, settings, and best practices for creating effective agents'
     );
     docs[url] = content;
   }
@@ -428,6 +436,23 @@ const main = async () => {
   
   if (config.proactive) {
     console.log(`\n🚀 This agent will proactively engage when it detects relevant tasks!`);
+    console.log(`\n⚠️  To enable automatic activation, add to your hooks configuration:`);
+    console.log(`    ~/.claude/settings.json or .claude/settings.json:`);
+    console.log(`    {`);
+    console.log(`      "hooks": {`);
+    console.log(`        "UserPromptSubmit": [`);
+    console.log(`          {`);
+    console.log(``);
+    console.log(`            "hooks": [`);
+    console.log(`              {`);
+    console.log(`                "type": "command",`);
+    console.log(`                "command": "task subagent_type=${config.name}"`);
+    console.log(`              }`);
+    console.log(`            ]`);
+    console.log(`          }`);
+    console.log(`        ]`);
+    console.log(`      }`);
+    console.log(`    }`);
   }
 };
 
@@ -458,6 +483,34 @@ Each agent comes with:
 - Edge case handling
 - Performance benchmarks
 
+## Quick Agent Documentation Access
+
+### Finding Existing Agents
+```bash
+# List all agents in your project
+ls -la .claude/agents/
+
+# Search for specific agent patterns
+grep -r "proactive" .claude/agents/
+
+# View agent documentation
+cat .claude/agents/agent-name.md
+```
+
+### Claude Code Documentation URLs
+Quick links to relevant documentation:
+- **Subagents**: https://docs.anthropic.com/en/docs/claude-code/sub-agents
+- **Hooks**: https://docs.anthropic.com/en/docs/claude-code/hooks
+- **Settings**: https://docs.anthropic.com/en/docs/claude-code/settings
+- **Best Practices**: https://docs.anthropic.com/en/docs/claude-code/best-practices
+
+### Using MCP Memory
+Claude can remember agent patterns:
+```
+mcp__memory__search_nodes query="subagent"
+mcp__memory__search_nodes query="proactive agent"
+```
+
 ## Tips for Success
 
 1. **Start Specific** - Narrow purpose = better agent
@@ -465,6 +518,110 @@ Each agent comes with:
 3. **Clear Triggers** - When should agent activate
 4. **Test Thoroughly** - Use generated test suite
 5. **Iterate Often** - Refine based on usage
+
+## Hook Configuration for Proactive Agents
+
+Proactive agents need to be added to Claude Code's hook system to work automatically.
+
+### Option 1: Global Settings Hook
+Add to your Claude Code settings (`~/.claude/settings.json`):
+```json
+{
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "task subagent_type=your-agent-name"
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+**Note**: UserPromptSubmit hooks don't require a matcher - they run for all prompts.
+
+### Option 2: Project-Specific Hook
+Add to project settings in `.claude/settings.json`:
+```json
+{
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "task subagent_type=your-agent-name"
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+### Multiple Proactive Agents
+Run multiple agents by adding multiple hooks:
+```json
+{
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "task subagent_type=agent1"
+          },
+          {
+            "type": "command", 
+            "command": "task subagent_type=agent2"
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+### Advanced: Tool-Specific Hooks
+For tool-based hooks, use matchers to specify which tools trigger the agent:
+```json
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": {
+          "tools": ["Write", "MultiEdit"]
+        },
+        "hooks": [
+          {
+            "type": "command",
+            "command": "task subagent_type=code-reviewer"
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+**Note**: Tool-based hooks (PreToolUse, PostToolUse) require matchers. UserPromptSubmit hooks don't.
+
+### Available Hook Types
+- `UserPromptSubmit` - After user submits a prompt
+- `PreToolUse` - Before using a tool
+- `PostToolUse` - After using a tool
+- `SessionStart` - When session begins
+- `Stop` - When stopping execution
+- `SubagentStop` - When subagent completes
+- `PreCompact` - Before context compaction
+
+**Note**: Without hook configuration, proactive agents won't activate automatically. You'll need to manually invoke them with the Task tool.
+
+Learn more: https://docs.anthropic.com/en/docs/claude-code/hooks
 
 ## Security Notes
 

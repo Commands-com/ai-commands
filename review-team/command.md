@@ -23,6 +23,8 @@ category: development
 
 This command creates and manages a project-aware code review team:
 
+> **⚠️ Important**: After creating new agents, you must restart Claude Code for them to become available. The agents are saved to your `.claude/agents/` directory and will be available after restart.
+
 1. **Project Analysis** - Automatically detects project type, language, frameworks, and features
 2. **Tailored Agents** - Each agent is customized based on your specific project needs
 3. **Smart Updates** - Detects when agents need project-specific customization
@@ -74,6 +76,9 @@ This command creates and manages a project-aware code review team:
 📝 Creating compliance-validator.md...
 
 ✅ Review team ready! 4 agents set up for your node project.
+
+⚠️  **IMPORTANT**: You must restart Claude Code for the new agents to be available.
+   After restarting, you can use them with: task subagent_type=<agent-name>
 
 🚀 Running comprehensive code review...
 ```
@@ -755,6 +760,12 @@ const main = async () => {
       }
       
       console.log(`\n✅ Review team ready! ${agentsToCreate.length} agents ${args.create ? 'created' : 'set up'} for your ${projectAnalysis.type} project.\n`);
+      
+      // Show restart notice if new agents were created
+      if (missing.length > 0) {
+        console.log(`⚠️  **IMPORTANT**: You must restart Claude Code for the new agents to be available.`);
+        console.log(`   After restarting, you can use them with: task subagent_type=<agent-name>\n`);
+      }
       
       // Update found list
       if (missing.length > 0) {

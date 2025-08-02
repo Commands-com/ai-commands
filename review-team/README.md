@@ -30,6 +30,8 @@ This command is part of the AI Commands collection. Once installed, you can use 
 3. **Customizes Agents** - Tailors each agent with project-specific context and focus areas
 4. **Reviews Smart** - Reviews uncommitted git changes or files in your current context window
 
+> **⚠️ Important**: After creating new agents, you must restart Claude Code for them to become available. The agents are saved to your `.claude/agents/` directory and will be accessible after restart.
+
 ## Review Team Members
 
 1. **implementation-verifier** - Validates code against specifications
@@ -56,6 +58,7 @@ This command is part of the AI Commands collection. Once installed, you can use 
 ### Direct Agent Usage
 ```bash
 # Once created, use agents directly for targeted reviews
+# NOTE: Restart Claude Code after creating agents for them to be available
 task subagent_type=implementation-verifier prompt="Check if auth matches the spec"
 task subagent_type=ui-tester prompt="Test the new dashboard on mobile"
 task subagent_type=code-quality-reviewer prompt="Review the data layer for over-engineering"

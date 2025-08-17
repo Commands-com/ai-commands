@@ -1,7 +1,6 @@
-# Performance Agent Builder
 ---
-description: >
-  Install a specialized Claude Code subagent that automatically monitors, diagnoses, and fixes performance issues in your codebase. The agent profiles code execution, identifies bottlenecks, applies optimizations, and verifies improvements autonomously.
+name: Performance Agent Builder
+description: Install a specialized Claude Code subagent that automatically monitors, diagnoses, and fixes performance issues in your codebase. The agent profiles code execution, identifies bottlenecks, applies optimizations, and verifies improvements autonomously.
 allowed_tools:
   - Read          # Read existing configs
   - Write         # Create new files

@@ -1,7 +1,6 @@
-# Review Team Manager
 ---
-description: >
-  Creates and manages a comprehensive code review team of specialized Claude Code agents. Sets up agents in your project's .claude/agents directory and provides coordinated review workflows for thorough code quality assessment.
+name: Review Team Manager
+description: Creates and manages a comprehensive code review team of specialized Claude Code agents. Sets up agents in your project's .claude/agents directory and provides coordinated review workflows for thorough code quality assessment.
 allowed_tools:
   - Read          # Check existing agents
   - Write         # Create agent files

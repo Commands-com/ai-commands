@@ -1,10 +1,6 @@
-# Smart Command Builder
 ---
-description: >
-  Intelligent command generator that creates complete Commands.com-compatible commands
-  from task descriptions. Analyzes available MCP servers to recommend optimal combinations,
-  generates proper commands.yaml entries, and creates all necessary files for immediate
-  Commands.com integration via GitHub.
+name: Smart Command Builder
+description: Intelligent command generator that creates complete Commands.com-compatible commands from task descriptions. Analyzes available MCP servers to recommend optimal combinations, generates proper commands.yaml entries, and creates all necessary files for immediate Commands.com integration via GitHub.
 allowed_tools:
   - mcp__commands-com_mcp-server    # MCP discovery and Commands.com integration
   - filesystem                     # File creation and directory management

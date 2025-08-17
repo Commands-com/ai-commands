@@ -1,7 +1,6 @@
-# Subagent Builder
 ---
-description: >
-  Build perfect Claude Code subagents using the latest documentation and best practices. This command fetches current guidelines, analyzes your needs, and creates specialized agents that follow all recommended patterns for maximum effectiveness.
+name: Subagent Builder
+description: Build perfect Claude Code subagents using the latest documentation and best practices. This command fetches current guidelines, analyzes your needs, and creates specialized agents that follow all recommended patterns for maximum effectiveness.
 allowed_tools:
   - WebFetch      # Fetch latest documentation
   - Read          # Analyze existing agents

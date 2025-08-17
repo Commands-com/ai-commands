@@ -1,10 +1,6 @@
-# API Explorer & Documentation Generator
 ---
-description: >
-  Comprehensive API analysis tool that discovers, tests, and documents APIs.
-  Automatically explores REST endpoints, generates OpenAPI specifications,
-  tests authentication methods, and creates interactive documentation.
-  Respects rate limits and robots.txt while providing ethical API reconnaissance.
+name: API Explorer & Documentation Generator
+description: Comprehensive API analysis tool that discovers, tests, and documents APIs. Automatically explores REST endpoints, generates OpenAPI specifications, tests authentication methods, and creates interactive documentation. Respects rate limits and robots.txt while providing ethical API reconnaissance.
 allowed_tools:
   - puppeteer       # Web scraping and browser automation
   - filesystem      # Save documentation and test results

@@ -1,7 +1,6 @@
-# Docs Validator Agent Builder
 ---
-description: >
-  Install a specialized Claude Code subagent that automatically monitors, validates, and fixes documentation issues in your codebase. The agent checks broken links, validates markdown standards, ensures frontmatter completeness, and maintains documentation quality autonomously.
+name: Docs Validator Agent Builder
+description: Install a specialized Claude Code subagent that automatically monitors, validates, and fixes documentation issues in your codebase. The agent checks broken links, validates markdown standards, ensures frontmatter completeness, and maintains documentation quality autonomously.
 allowed_tools:
   - Read          # Read existing configs
   - Write         # Create new files

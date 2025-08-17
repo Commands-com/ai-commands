@@ -1,10 +1,6 @@
-# Project Scaffolder
 ---
-description: >
-  Production-grade project bootstrapper that creates complete development environments
-  with security-first best practices. Validates stack/deployment compatibility, sets up
-  CI/CD pipelines with stack-specific workflows, implements comprehensive testing, and
-  creates architecture documentation. Features pluggable extensions and environment abstractions.
+name: Project Scaffolder
+description: Production-grade project bootstrapper that creates complete development environments with security-first best practices. Validates stack/deployment compatibility, sets up CI/CD pipelines with stack-specific workflows, implements comprehensive testing, and creates architecture documentation. Features pluggable extensions and environment abstractions.
 allowed_tools:
   - filesystem      # Create project structure and files
   - github          # Initialize repository and setup workflows

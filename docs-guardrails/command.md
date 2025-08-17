@@ -1,9 +1,6 @@
-# Docs Guardrails
 ---
-description: >
-  Ship content without surprises—no 404s, no empty titles, no brand hits.
-  One-shot command that installs link & content guardrails via PR. Works with
-  11ty, Astro, Hugo, Docusaurus, Next static, and more.
+name: Docs Guardrails
+description: Ship content without surprises—no 404s, no empty titles, no brand hits. One-shot command that installs link & content guardrails via PR. Works with 11ty, Astro, Hugo, Docusaurus, Next static, and more.
 allowed_tools:
   - Read          # Read existing configs
   - Write         # Create new files

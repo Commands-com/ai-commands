@@ -1,8 +1,6 @@
 ---
-description: >
-  Automatically generate release notes for Discord by analyzing Git commits since the last published release.
-  Searches Discord for previous release notes, summarizes all commits since then, and creates formatted
-  release notes ready for Discord posting. Works with any Git repository in your current directory.
+name: Discord Release Agent
+description: Automatically generate release notes for Discord by analyzing Git commits since the last published release. Searches Discord for previous release notes, summarizes all commits since then, and creates formatted release notes ready for Discord posting. Works with any Git repository in your current directory.
 allowed_tools:
   - Bash             # Git operations via command line
   - mcp-discord      # Discord integration for searching messages

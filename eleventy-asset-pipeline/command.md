@@ -1,10 +1,6 @@
-# Eleventy Asset Pipeline
 ---
-description: >
-  Scaffold and maintain a production-grade asset pipeline for Eleventy sites.
-  Validates project structure, sets up JavaScript bundling with esbuild,
-  CSS processing with PostCSS/Tailwind, and implements cache-busting with
-  content hashing. Creates a complete build system with hot reloading.
+name: Eleventy Asset Pipeline
+description: Scaffold and maintain a production-grade asset pipeline for Eleventy sites. Validates project structure, sets up JavaScript bundling with esbuild, CSS processing with PostCSS/Tailwind, and implements cache-busting with content hashing. Creates a complete build system with hot reloading.
 allowed_tools:
   - filesystem      # Create pipeline files and configurations
 tags:

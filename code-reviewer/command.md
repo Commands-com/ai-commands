@@ -1,10 +1,6 @@
-# AI Code Reviewer
 ---
-description: >
-  Intelligent code review assistant that analyzes code quality, security vulnerabilities,
-  performance issues, and best practices. Integrates with GitHub for pull request analysis,
-  uses filesystem for local code inspection, and maintains a knowledge base of common
-  issues and solutions across different programming languages.
+name: AI Code Reviewer
+description: Intelligent code review assistant that analyzes code quality, security vulnerabilities, performance issues, and best practices. Integrates with GitHub for pull request analysis, uses filesystem for local code inspection, and maintains a knowledge base of common issues and solutions across different programming languages.
 allowed_tools:
   - github          # Pull request and repository analysis
   - filesystem      # Local code file analysis
